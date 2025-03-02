@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
-using Unity.Advertisement.IosSupport;
 
 
 public class GameManager : MonoBehaviour
