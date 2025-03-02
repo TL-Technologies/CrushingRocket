@@ -89,6 +89,12 @@ public class LauncherSc : MonoBehaviour
     [ContextMenu("fgji")]
     public void dd()
     {
+        PlayerPrefs.SetInt("Coins",5000);
+    }
+    
+    [ContextMenu("gdf")]
+    public void gd()
+    {
         PlayerPrefs.DeleteAll();
     }
 
