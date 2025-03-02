@@ -86,6 +86,12 @@ public class LauncherSc : MonoBehaviour
         //Decharge();
     }
 
+    [ContextMenu("fgji")]
+    public void dd()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
 
     public void Charge()
     {
