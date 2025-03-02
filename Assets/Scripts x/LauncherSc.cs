@@ -141,7 +141,13 @@ public class LauncherSc : MonoBehaviour
 
     public void UpdateCannonModel()
     {
-        cannon.SetBlendShapeWeight(0, longKey.Evaluate(GameManager.instance.upgrade.heightCard.level));
-        cannon.SetBlendShapeWeight(1, wideKey.Evaluate(GameManager.instance.upgrade.forceCard.level));
+        if (cannon.sharedMesh != null && cannon.sharedMesh.blendShapeCount > 0)
+        {
+            cannon.SetBlendShapeWeight(0, longKey.Evaluate(GameManager.instance.upgrade.heightCard.level));
+        }
+        if (cannon.sharedMesh && cannon.sharedMesh.blendShapeCount > 1)
+        {
+            cannon.SetBlendShapeWeight(1, wideKey.Evaluate(GameManager.instance.upgrade.forceCard.level));
+        }
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
-using GameAnalyticsSDK;
-using Facebook.Unity;
 using Unity.Advertisement.IosSupport;
 
 
@@ -65,50 +63,13 @@ public class GameManager : MonoBehaviour
         }
 
         coins = PlayerPrefs.GetInt("Coins");
-
-
-        //
-        //INIT
-        InitializeFacebook();
-        GameAnalytics.Initialize();
     }
 
-    private void InitializeFacebook()
-    {
-        if (!FB.IsInitialized)
-        {
-            FB.Init(FbInitCallback);
-        }
-        else
-        {
-            FB.ActivateApp();
-        }
-    }
+ 
 
-    private void FbInitCallback()
-    {
-        FB.Mobile.SetAdvertiserTrackingEnabled(true);
-        FB.Mobile.SetAutoLogAppEventsEnabled(true);
+   
 
-        if (FB.IsInitialized)
-        {
-            FB.ActivateApp();
-        }
-        else
-        {
-            Debug.Log("Failed to Initialize the Facebook SDK");
-        }
-
-        Invoke(nameof(RegisterAppFOrNetworkAttribution), 1f);
-    }
-
-    private void RegisterAppFOrNetworkAttribution()
-    {
-        Debug.Log("SkAdNetworkRegisterAppForNetworkAttribution is called");
-
-
-        SkAdNetworkBinding.SkAdNetworkRegisterAppForNetworkAttribution();
-    }
+   
 
     private void Start()
     {
@@ -170,12 +131,7 @@ public class GameManager : MonoBehaviour
             uiAnim.SetBool("Tuto", false);
         }
 
-        //
-        //Start
-        // level => PlayerPrefs.GetInt("Level").ToString()
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "LEVEL" + PlayerPrefs.GetInt("Level").ToString());
-
-        //
+        
     }
 
     public void Replay()
@@ -195,13 +151,7 @@ public class GameManager : MonoBehaviour
         transitBgWon.SetActive(false);
 
         uiAnim.SetBool("Lose", true);
-
-        //
-        //LOSE
-        // level => PlayerPrefs.GetInt("Level").ToString()
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "LEVEL" + PlayerPrefs.GetInt("Level").ToString());
-
-        //
+        
     }
     public void Won()
     {
@@ -221,13 +171,6 @@ public class GameManager : MonoBehaviour
         
 
         toBonusLevel = true;
-
-        //
-        //WON
-        // level => PlayerPrefs.GetInt("Level").ToString()
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "LEVEL" + PlayerPrefs.GetInt("Level").ToString());
-
-        //
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
     }
 
